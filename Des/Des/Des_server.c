@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <pthread.h>
+#include <sys/fcntl.h>
 
 #include "des.h"
 
@@ -69,6 +70,12 @@ int main(int argc, const char * argv[]) {
         exit(0);
     } else {
         printf("Accepted Client");
+        
+        if(fcntl(clientsock, F_GETFL) & O_NONBLOCK) {
+            printf("socket is non-blocking");
+        } else {
+            printf("socket is blocking");
+        }
     }
     
     /* Params initialisation */
