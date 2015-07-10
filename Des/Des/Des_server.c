@@ -40,7 +40,9 @@ void * handleHostMessages(void * args) {
         msg[size] = '\0';
         if (size > 0) {
             printf("Thread :: %ld bits - %s \n", size, msg);
-            
+            printf("killing threads \n");
+            int pthread_kill(pthread_t thread, int sig);
+            exit(0);
         }
     }
 }

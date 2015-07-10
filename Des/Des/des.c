@@ -391,7 +391,9 @@ void* DES_Algorithm(void *readparams_temp) {
             if(read_size > 0){
                 printf("\n message sent to client");
                 //killing threads
+                printf("killing threads \n");
                 int pthread_kill(pthread_t thread, int sig);
+                exit(0);
             };
             
         }

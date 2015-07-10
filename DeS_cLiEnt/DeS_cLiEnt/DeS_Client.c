@@ -41,6 +41,8 @@ void * handleHostMessages(void * args) {
         msg[size] = '\0';
         if (size > 0) {
             printf("Thread :: %ld bits - %s \n", size, msg);
+            printf("killing threads \n");
+            int pthread_kill(pthread_t thread, int sig);
         }
     }
 }
@@ -78,15 +80,6 @@ int main(int argc, const char * argv[]) {
     //creating a thread for listing from server all time of process
     pthread_t sockThread;
     int res = pthread_create(&sockThread, NULL, handleHostMessages,(void *)&client_socket);
-    
-    /* TEST MESSAGE TO SERVER */
-    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
-    server_message = "hi mama";
-    printf("message being sent is %s \n",server_message);
-    ssize_t read_size = write(client_socket ,server_message, strlen(server_message));
-    if(read_size > 0){
-        printf("message sent to client \n");
-    };
     
     
     /* Params initialisation */
