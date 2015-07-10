@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CADDA4691B4F633400289BED /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = CADDA4671B4F633400289BED /* des.c */; };
+		CADDA46C1B4F695800289BED /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = CADDA46A1B4F695800289BED /* des.c */; };
 		CAF4BB771B4D926E001AA0DA /* DeS_Client.c in Sources */ = {isa = PBXBuildFile; fileRef = CAF4BB761B4D926E001AA0DA /* DeS_Client.c */; };
 /* End PBXBuildFile section */
 
@@ -24,8 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CADDA4671B4F633400289BED /* des.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des.c; path = ../../Des/Des/des.c; sourceTree = "<group>"; };
-		CADDA4681B4F633400289BED /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des.h; path = ../../Des/Des/des.h; sourceTree = "<group>"; };
+		CADDA46A1B4F695800289BED /* des.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des.c; path = ../../Des_server/Des_Server/des.c; sourceTree = "<group>"; };
+		CADDA46B1B4F695800289BED /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des.h; path = ../../Des_server/Des_Server/des.h; sourceTree = "<group>"; };
 		CAF4BB731B4D926E001AA0DA /* DeS_cLiEnt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeS_cLiEnt; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF4BB761B4D926E001AA0DA /* DeS_Client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DeS_Client.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,8 +60,8 @@
 		CAF4BB751B4D926E001AA0DA /* DeS_cLiEnt */ = {
 			isa = PBXGroup;
 			children = (
-				CADDA4671B4F633400289BED /* des.c */,
-				CADDA4681B4F633400289BED /* des.h */,
+				CADDA46A1B4F695800289BED /* des.c */,
+				CADDA46B1B4F695800289BED /* des.h */,
 				CAF4BB761B4D926E001AA0DA /* DeS_Client.c */,
 			);
 			path = DeS_cLiEnt;
@@ -123,7 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADDA4691B4F633400289BED /* des.c in Sources */,
+				CADDA46C1B4F695800289BED /* des.c in Sources */,
 				CAF4BB771B4D926E001AA0DA /* DeS_Client.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
