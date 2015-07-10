@@ -59,24 +59,33 @@ int main(int argc, const char * argv[]) {
     else
         printf("Error\n");
     
-    /*---- Accept call creates a new socket for the incoming connection ----*/
+    /* Accept call creates a new socket for the incoming connection */
     addr_size = sizeof client_addr;
     int clientsock = accept(welcomeSocket,
                            (struct sockaddr *) &client_addr,
                            &addr_size);
     
     if (clientsock < 0) {
-        printf("Client not accepted");
+        printf("Client not accepted \n");
         exit(0);
     } else {
-        printf("Accepted Client");
+        printf("Accepted Client \n");
         
-        if(fcntl(clientsock, F_GETFL) & O_NONBLOCK) {
-            printf("socket is non-blocking");
-        } else {
-            printf("socket is blocking");
-        }
+//        if(fcntl(clientsock, F_GETFL) & O_NONBLOCK) {
+//            printf("socket is non-blocking \n");
+//        } else {
+//            printf("socket is blocking \n");
+//            if(fcntl(clientsock, F_SETFL, fcntl(clientsock, F_GETFL) | O_NONBLOCK) < 0) {
+                // handle error
+//                printf("Unable to make it non-blocking");
+//            }
+//        }
     }
+    
+    /* Test message from Client */
+    char *msg;
+    ssize_t size = recv(clientsock, msg, 20, 0);
+    printf("recieved %ld bits", size);
     
     /* Params initialisation */
     
@@ -88,7 +97,7 @@ int main(int argc, const char * argv[]) {
         params[i].client_socket = clientsock;
     }
     
-    printf("\n client socket is : %d",params[0].client_socket);
+    printf("client socket is : %d \n",params[0].client_socket);
     
     /* thread creation */
     
