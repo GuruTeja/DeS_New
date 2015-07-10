@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CADDA4691B4F633400289BED /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = CADDA4671B4F633400289BED /* des.c */; };
+		CAF4BB771B4D926E001AA0DA /* DeS_Client.c in Sources */ = {isa = PBXBuildFile; fileRef = CAF4BB761B4D926E001AA0DA /* DeS_Client.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CAF4BB711B4D926E001AA0DA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CADDA4671B4F633400289BED /* des.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des.c; path = ../../Des/Des/des.c; sourceTree = "<group>"; };
+		CADDA4681B4F633400289BED /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des.h; path = ../../Des/Des/des.h; sourceTree = "<group>"; };
+		CAF4BB731B4D926E001AA0DA /* DeS_cLiEnt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DeS_cLiEnt; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAF4BB761B4D926E001AA0DA /* DeS_Client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DeS_Client.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAF4BB701B4D926E001AA0DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAF4BB6A1B4D926E001AA0DA = {
+			isa = PBXGroup;
+			children = (
+				CAF4BB751B4D926E001AA0DA /* DeS_cLiEnt */,
+				CAF4BB741B4D926E001AA0DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAF4BB741B4D926E001AA0DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAF4BB731B4D926E001AA0DA /* DeS_cLiEnt */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAF4BB751B4D926E001AA0DA /* DeS_cLiEnt */ = {
+			isa = PBXGroup;
+			children = (
+				CADDA4671B4F633400289BED /* des.c */,
+				CADDA4681B4F633400289BED /* des.h */,
+				CAF4BB761B4D926E001AA0DA /* DeS_Client.c */,
+			);
+			path = DeS_cLiEnt;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAF4BB721B4D926E001AA0DA /* DeS_cLiEnt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAF4BB7A1B4D926E001AA0DA /* Build configuration list for PBXNativeTarget "DeS_cLiEnt" */;
+			buildPhases = (
+				CAF4BB6F1B4D926E001AA0DA /* Sources */,
+				CAF4BB701B4D926E001AA0DA /* Frameworks */,
+				CAF4BB711B4D926E001AA0DA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeS_cLiEnt;
+			productName = DeS_cLiEnt;
+			productReference = CAF4BB731B4D926E001AA0DA /* DeS_cLiEnt */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAF4BB6B1B4D926E001AA0DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Siva pratap reddy Devireddy";
+				TargetAttributes = {
+					CAF4BB721B4D926E001AA0DA = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = CAF4BB6E1B4D926E001AA0DA /* Build configuration list for PBXProject "DeS_cLiEnt" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CAF4BB6A1B4D926E001AA0DA;
+			productRefGroup = CAF4BB741B4D926E001AA0DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAF4BB721B4D926E001AA0DA /* DeS_cLiEnt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAF4BB6F1B4D926E001AA0DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CADDA4691B4F633400289BED /* des.c in Sources */,
+				CAF4BB771B4D926E001AA0DA /* DeS_Client.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CAF4BB781B4D926E001AA0DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CAF4BB791B4D926E001AA0DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CAF4BB7B1B4D926E001AA0DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CAF4BB7C1B4D926E001AA0DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAF4BB6E1B4D926E001AA0DA /* Build configuration list for PBXProject "DeS_cLiEnt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF4BB781B4D926E001AA0DA /* Debug */,
+				CAF4BB791B4D926E001AA0DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAF4BB7A1B4D926E001AA0DA /* Build configuration list for PBXNativeTarget "DeS_cLiEnt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF4BB7B1B4D926E001AA0DA /* Debug */,
+				CAF4BB7C1B4D926E001AA0DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAF4BB6B1B4D926E001AA0DA /* Project object */;
+}
