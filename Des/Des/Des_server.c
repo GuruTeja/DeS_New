@@ -93,11 +93,9 @@ int main(int argc, const char * argv[]) {
     /* thread creation */
     
     pthread_t threads[NTHREADS];
-    int thread_args[NTHREADS];
     int rc,i;
     
     for (int i=0; i < NTHREADS; i++) {
-        thread_args[i] = i;
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
         if (rc != 0) {
             printf("Thread %d creation failed !", i);
@@ -105,34 +103,10 @@ int main(int argc, const char * argv[]) {
     }
     
     /* wait for threads to finish */
-    for (i=0; i<NTHREADS; ++i) {
+    for (i=0; i < NTHREADS; ++i) {
         rc = pthread_join(threads[i], NULL);
     }
     
     printf("== Press any key to exit ==");
     return getchar();
 }
-
-
-/*
- 
- //ack/read from client
- ssize_t readsize = 0;
- //while(readsize == 0){
- readsize = recv(readParams.client_socket, readParams.server_message, 20, 0);
- 
- printf("\n message from server is %s",readParams.server_message);
- 
- if(readsize > 0) {
- printf("\n ack received from server");
- //key from server
- readParams.server_message[readsize] = '\0';
- printf("\n key found by server is : %s",readParams.server_message);
- printf("\n stop all threads");
- int pthread_kill(pthread_t thread, int sig);
- printf("\n killed all threads");
- printf("\n exiting from code");
- exit(0);
- }
- 
- */
