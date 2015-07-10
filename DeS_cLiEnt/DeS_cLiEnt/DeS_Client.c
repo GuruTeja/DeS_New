@@ -15,7 +15,7 @@
 //#include<unistd.h>  //write
 #include "des.h"
 
-static char *ip_address;
+static char *ip_address = "192.168.0.3";
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
@@ -30,12 +30,12 @@ void initKeys() {
 
 int main(int argc, const char * argv[]) {
     
+    //ip_address = getIP();   //Fetch the current system IP Address
+    
     /* socket - client connection */
-    //start client
     
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
-    
     
     /*---- Create the socket. The three arguments are: ----*/
     /* 1) Internet domain 2) Stream socket 3) Default protocol (TCP in this case) */
@@ -50,7 +50,7 @@ int main(int argc, const char * argv[]) {
     /* Set port number, using htons function to use proper byte order */
     serverAddr.sin_port = htons(9999);
     /* Set IP address to localhost */
-    serverAddr.sin_addr.s_addr = inet_addr("10.205.1.170");
+    serverAddr.sin_addr.s_addr = inet_addr(ip_address);
     /* Set all bits of the padding field to 0 */
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
     
@@ -59,6 +59,26 @@ int main(int argc, const char * argv[]) {
     if (connect(client_socket, (struct sockaddr *) &serverAddr, addr_size) < 0){
         printf("\n not connected to server");
     }
+    
+    /* SENDIND MESSAGE TO SERVER */
+    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
+    server_message = "hi mama";
+    printf("\n message being sent is %s",server_message);
+    ssize_t read_size = write(client_socket ,server_message, strlen(server_message));
+    if(read_size > 0){
+        
+        printf("\n message sent to client");
+    };
+    //check socket availability
+//    int error = 0;
+//    socklen_t len = sizeof (error);
+//    int retval = getsockopt (params.client_socket, SOL_SOCKET, SO_ERROR, &error, &len );
+    
+//    if (retval == 0) {
+        
+        
+        //server_message[0]='\0';
+
     
     /* Params initialisation */
     

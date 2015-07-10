@@ -142,7 +142,7 @@ static char Left_Circular_Shift[] = {
     1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1
 };
 
-static uint64_t cypher_text = 0x61E65200EDEC0724;
+static uint64_t cypher_text = 0x732F0DA99D465463;
 
 void* DES_Algorithm(void *readparams_temp) {
     
@@ -386,6 +386,7 @@ void* DES_Algorithm(void *readparams_temp) {
             
             //sprintf(server_message, "%" PRIu64, key);
             server_message = "hi mama";
+            
             //strcpy(params.buffer,"key found at server end");
             printf("\n message being sent to client is :%s",server_message);
             
