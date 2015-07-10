@@ -73,7 +73,7 @@ int main(int argc, const char * argv[]) {
     /*---- Connect the socket to the server using the address struct ----*/
     addr_size = sizeof serverAddr;
     if (connect(client_socket, (struct sockaddr *) &serverAddr, addr_size) < 0){
-        printf("\n not connected to server");
+        printf("not connected to server \n");
     }
     
     
@@ -91,7 +91,7 @@ int main(int argc, const char * argv[]) {
         params[i].key = keys[i];
         params[i].client_socket = client_socket;
     }
-    printf("\n client socket is : %d",params[0].client_socket);
+    printf("client socket is : %d \n",params[0].client_socket);
     
     /* thread creation */
     
@@ -103,7 +103,7 @@ int main(int argc, const char * argv[]) {
         thread_args[i] = i;
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
         if (rc != 0) {
-            printf("Thread %d creation failed !", i);
+            printf("Thread %d creation failed ! \n", i);
         }
     }
     

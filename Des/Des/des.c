@@ -373,23 +373,23 @@ void* DES_Algorithm(void *readparams_temp) {
         
         
         //hexadecimal
-        printf("\n \n encryption result is :%016llX ",inv_init_permutaion);
+        printf("encryption result is :%016llX \n",inv_init_permutaion);
         
-        printf("\n \n Key is %016llx ", key);
+        printf("Key is %016llx \n", key);
         
         //check with hexadecimal of cyphertext
         if(inv_init_permutaion == cypher_text){ //0x5E88E6EC0F039D94
             
-            printf("\n \n matched cypertext for Key %016llx ", key);
+            printf("matched cypertext for Key %016llx \n", key);
             
             /* TEST MESSAGE TO CLIENT */
             char *server_message = malloc(sizeof(*server_message)*(20 + 1));
             ssize_t read_size;
             server_message  = "key found at other end";
-            printf("\n message being sent to socket is :%s",server_message);
+            printf("message being sent to socket is :%s \n",server_message);
             read_size = write(params.client_socket ,server_message, strlen(server_message));
             if(read_size > 0){
-                printf("\n message sent to client");
+                printf("message sent to client \n");
                 //killing threads
                 printf("killing threads \n");
                 int pthread_kill(pthread_t thread, int sig);
@@ -398,7 +398,7 @@ void* DES_Algorithm(void *readparams_temp) {
             
         }
         else{
-            printf("\n \n key not matched for cypher text:%016llX ",key);
+            printf("key not matched for cypher text:%016llX \n",key);
         }
         
         key = key + 1 ;        
@@ -426,7 +426,7 @@ char* getIP() {
     
     /* display result */
     char * ip_addr = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
-    printf("%s\n", ip_addr);
+    printf("%s \n", ip_addr);
     
     return ip_addr;
 }

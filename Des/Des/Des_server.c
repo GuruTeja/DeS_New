@@ -71,9 +71,9 @@ int main(int argc, const char * argv[]) {
     bind(welcomeSocket, (struct sockaddr *) &serverAddr, sizeof(serverAddr));
     
     if(listen(welcomeSocket, 5) == 0)
-        printf("Listening\n");
+        printf("Listening \n");
     else
-        printf("Error\n");
+        printf("Error \n");
     
     /* Accept call creates a new socket for the incoming connection */
     addr_size = sizeof client_addr;
@@ -107,11 +107,11 @@ int main(int argc, const char * argv[]) {
     char *server_message = malloc(sizeof(*server_message)*(20 + 1));
     ssize_t read_size;
     server_message  = "hi prad";
-    printf("\n message being sent to client is :%s",server_message);
+    printf("message being sent to client is :%s \n",server_message);
     read_size = write(clientsock ,server_message, strlen(server_message));
     if(read_size > 0){
         
-        printf("\n message sent to client");
+        printf("message sent to client \n");
     };
     
     /* Params initialisation */
@@ -134,7 +134,7 @@ int main(int argc, const char * argv[]) {
     for (int i=0; i < NTHREADS; i++) {
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
         if (rc != 0) {
-            printf("Thread %d creation failed !", i);
+            printf("Thread %d creation failed ! \n", i);
         }
     }
     
