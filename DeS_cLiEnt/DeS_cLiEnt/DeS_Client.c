@@ -15,18 +15,36 @@
 //#include<unistd.h>  //write
 #include "des.h"
 
-static char *ip_address = "192.168.0.3";
+static char *ip_address = "192.168.0.24";
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
 
 void initKeys() {
-    keys[0]     =   0x0000000000000050;
+    keys[0]     =   0x0000000000000020;
     keys[1]     =   0x0000000000000060;
     keys[2]     =   0x0000000000000070;
     keys[3]     =   0x0000000000000080;
     keys[4]     =   0x0000000000000090;
 }
+
+void * handleHostMessages(void * args) {
+    /* REVEIVING MESSAGE FROM SERVER*/
+    //        char *msg;
+    //        ssize_t size = recv(client_socket, msg, 20, 0);
+    //        printf("recieved %ld bits", size);
+    char *msg = malloc(20);
+    int client_socket = *((int *)args);
+    printf("Thread :: Sock is %d \n", client_socket);
+    while (1) {
+        ssize_t size = recv(client_socket, msg, 2000, 0);
+        msg[size] = '\0';
+        if (size > 0) {
+            printf("Thread :: %ld bits - %s \n", size, msg);
+        }
+    }
+}
+
 
 int main(int argc, const char * argv[]) {
     
@@ -41,17 +59,13 @@ int main(int argc, const char * argv[]) {
     /* 1) Internet domain 2) Stream socket 3) Default protocol (TCP in this case) */
     int client_socket;
     client_socket = socket(PF_INET, SOCK_STREAM, 0);
-    int set = 1;
-    setsockopt(client_socket, SOL_SOCKET, SO_NOSIGPIPE, (void *)&set, sizeof(int));
+    //int set = 1;
+    //setsockopt(client_socket, SOL_SOCKET, SO_NOSIGPIPE, (void *)&set, sizeof(int));
     
     /*---- Configure settings of the server address struct ----*/
-    /* Address family = Internet */
     serverAddr.sin_family = AF_INET;
-    /* Set port number, using htons function to use proper byte order */
     serverAddr.sin_port = htons(9999);
-    /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr(ip_address);
-    /* Set all bits of the padding field to 0 */
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
     
     /*---- Connect the socket to the server using the address struct ----*/
@@ -60,25 +74,20 @@ int main(int argc, const char * argv[]) {
         printf("\n not connected to server");
     }
     
-    /* SENDIND MESSAGE TO SERVER */
+    
+    //creating a thread for listing from server all time of process
+    pthread_t sockThread;
+    int res = pthread_create(&sockThread, NULL, handleHostMessages,(void *)&client_socket);
+    
+    /* TEST MESSAGE TO SERVER */
     char *server_message = malloc(sizeof(*server_message)*(20 + 1));
     server_message = "hi mama";
-    printf("\n message being sent is %s",server_message);
+    printf("message being sent is %s \n",server_message);
     ssize_t read_size = write(client_socket ,server_message, strlen(server_message));
     if(read_size > 0){
-        
-        printf("\n message sent to client");
+        printf("message sent to client \n");
     };
-    //check socket availability
-//    int error = 0;
-//    socklen_t len = sizeof (error);
-//    int retval = getsockopt (params.client_socket, SOL_SOCKET, SO_ERROR, &error, &len );
     
-//    if (retval == 0) {
-        
-        
-        //server_message[0]='\0';
-
     
     /* Params initialisation */
     

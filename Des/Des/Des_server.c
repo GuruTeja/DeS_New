@@ -22,13 +22,27 @@ static char *ip_address;
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
-
+uint64_t Input_Text = 0x0123456789ABCDEF;
 void initKeys() {
     keys[0]     =   0x0000000000000000;
     keys[1]     =   0x0000000000000010;
-    keys[2]     =   0x0000000000000020;
-    keys[3]     =   0x0000000000000030;
-    keys[4]     =   0x0000000000000040;
+    keys[2]     =   0x0000000000000030;
+    keys[3]     =   0x0000000000000040;
+    keys[4]     =   0x0000000000000050;
+}
+
+void * handleHostMessages(void * args) {
+    char *msg = malloc(20);
+    int clientsock = *((int *)args);
+    printf("Thread :: Sock is %d \n", clientsock);
+    while (1) {
+        ssize_t size = recv(clientsock, msg, 2000, 0);
+        msg[size] = '\0';
+        if (size > 0) {
+            printf("Thread :: %ld bits - %s \n", size, msg);
+            
+        }
+    }
 }
 
 int main(int argc, const char * argv[]) {
@@ -82,17 +96,28 @@ int main(int argc, const char * argv[]) {
 //        }
     }
     
-    /* Test message from Client */
-    char *msg;
-    ssize_t size = recv(clientsock, msg, 20, 0);
-    printf("recieved %ld bits", size);
+    //creating a thread for listing from client all time of process
+    pthread_t sockThread;
+    int res = pthread_create(&sockThread, NULL, handleHostMessages,(void *)&clientsock);
+    
+    
+    /* TEST MESSAGE TO CLIENT */
+    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
+    ssize_t read_size;
+    server_message  = "hi prad";
+    printf("\n message being sent to client is :%s",server_message);
+    read_size = write(clientsock ,server_message, strlen(server_message));
+    if(read_size > 0){
+        
+        printf("\n message sent to client");
+    };
     
     /* Params initialisation */
     
     initKeys();
     
     for (int i=0; i < NTHREADS; i++) {
-        params[i].input_text = 0x0123456789ABCDEF;
+        params[i].input_text = Input_Text;
         params[i].key = keys[i];
         params[i].client_socket = clientsock;
     }
