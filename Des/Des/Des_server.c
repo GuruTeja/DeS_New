@@ -2,8 +2,8 @@
 //  main.c
 //  DES_Algorithm
 //
-//  Created by Siva pratap reddy Devireddy on 7/3/15.
-//  Copyright (c) 2015 Siva pratap reddy Devireddy. All rights reserved.
+//  Created by Guru Teja Mannava on 7/3/15.
+//  Copyright (c) 2015 Guru Teja Mannava. All rights reserved.
 //
 
 #include <stdio.h>
@@ -86,16 +86,6 @@ int main(int argc, const char * argv[]) {
         exit(0);
     } else {
         printf("Accepted Client \n");
-        
-//        if(fcntl(clientsock, F_GETFL) & O_NONBLOCK) {
-//            printf("socket is non-blocking \n");
-//        } else {
-//            printf("socket is blocking \n");
-//            if(fcntl(clientsock, F_SETFL, fcntl(clientsock, F_GETFL) | O_NONBLOCK) < 0) {
-                // handle error
-//                printf("Unable to make it non-blocking");
-//            }
-//        }
     }
     
     //creating a thread for listing from client all time of process

@@ -2,8 +2,8 @@
 //  des.c
 //  Des
 //
-//  Created by Siva pratap reddy Devireddy on 7/9/15.
-//  Copyright (c) 2015 Siva pratap reddy Devireddy. All rights reserved.
+//  Created by Guru Teja Mannava on 7/9/15.
+//  Copyright (c) 2015 Guru Teja Mannava. All rights reserved.
 //
 
 #include <stdio.h>
@@ -426,7 +426,7 @@ char* getIP() {
     
     /* display result */
     char * ip_addr = inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr);
-    printf("%s \n", ip_addr);
+    printf("%s\n", ip_addr);
     
     return ip_addr;
 }

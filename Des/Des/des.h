@@ -2,8 +2,8 @@
 //  des.h
 //  Des
 //
-//  Created by Siva pratap reddy Devireddy on 7/9/15.
-//  Copyright (c) 2015 Siva pratap reddy Devireddy. All rights reserved.
+//  Created by Guru Teja Mannava on 7/9/15.
+//  Copyright (c) 2015 Guru Teja Mannava. All rights reserved.
 //
 
 //socket

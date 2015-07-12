@@ -2,8 +2,8 @@
 //  main.c
 //  DES_Algorithm
 //
-//  Created by Siva pratap reddy Devireddy on 7/3/15.
-//  Copyright (c) 2015 Siva pratap reddy Devireddy. All rights reserved.
+//  Created by Guru Teja Mannava on 7/3/15.
+//  Copyright (c) 2015 GUru Teja Mannava. All rights reserved.
 //
 
 #include <stdio.h>
@@ -61,8 +61,6 @@ int main(int argc, const char * argv[]) {
     /* 1) Internet domain 2) Stream socket 3) Default protocol (TCP in this case) */
     int client_socket;
     client_socket = socket(PF_INET, SOCK_STREAM, 0);
-    //int set = 1;
-    //setsockopt(client_socket, SOL_SOCKET, SO_NOSIGPIPE, (void *)&set, sizeof(int));
     
     /*---- Configure settings of the server address struct ----*/
     serverAddr.sin_family = AF_INET;
