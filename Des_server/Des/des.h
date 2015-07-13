@@ -20,12 +20,13 @@
 
 typedef struct params {
     uint64_t key;  //cypher text for this key A956007AC5E6FCFE
-    uint64_t input_text;
+    uint64_t input_text,cipher_Text;
     int count;
     int client_socket;
     char server_message[10];
     char buffer[1024];
     int round;
+    
     //time
     clock_t start;
 } desparams;

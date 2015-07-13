@@ -143,11 +143,11 @@ static char Left_Circular_Shift[] = {
     1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1
 };
 
-static uint64_t cypher_text = 0xDA37CF9F90C06DD5;  //4E0C2966F1412AD2; //1EFF8758AEC707F9
+//static uint64_t cypher_text = 0xDA37CF9F90C06DD5;  //4E0C2966F1412AD2; //1EFF8758AEC707F9
 
 void* DES_Algorithm(void *readparams_temp) {
 
-    uint64_t key, input_text;
+    uint64_t key, input_text,cypher_text;
     int round_test;
     clock_t start;
     desparams params = *((desparams *) readparams_temp);
@@ -155,6 +155,7 @@ void* DES_Algorithm(void *readparams_temp) {
     input_text = params.input_text;
     start = params.start;
     round_test = params.round;
+    cypher_text = params.cipher_Text;
     printf("Input: %016llx \n", input_text);
     printf("Key: %016llx \n", key);
     
@@ -345,12 +346,12 @@ void* DES_Algorithm(void *readparams_temp) {
         //hexadecimal
         printf("encryption result is :%016llX \n",inv_init_permutaion);
         
-        printf("Key is %016llx \n", key);
+        //printf("Key is %016llx \n", key);
         
         //check with hexadecimal of cyphertext
         if(inv_init_permutaion == cypher_text){ //0x5E88E6EC0F039D94
             
-            printf("matched cypertext for Key %016llx \n", key);
+            printf("matched cypertext is %016llx for Key %016llx \n",cypher_text ,key);
             
             /* TEST MESSAGE TO CLIENT */
             char *server_message = malloc(sizeof(*server_message)*(20 + 1));
@@ -404,5 +405,54 @@ char* getIP() {
     
     return ip_addr;
 }
+
+#define Max 1000
+char* DecimalToHexa(char binary_number[Max]){
+    
+    int temp;
+    
+    long int i=0,j=15;
+    
+    char hexaDecimal[Max] , hexaDecimal1[Max];
+    
+    hexaDecimal1[0] = '\0';
+    
+    hexaDecimal[0] = '\0';
+    
+    while(binary_number[i]){
+        binary_number[i] = binary_number[i] - 48;
+        ++i;
+    }
+    --i;
+    
+    while(i-2>=0){
+        temp =  binary_number[i-3] *8 + binary_number[i-2] *4 +  binary_number[i-1] *2 + binary_number[i] ;
+        if(temp > 9){
+            hexaDecimal[j] = temp + 55;
+            j = j-1;
+        }
+        else{
+            hexaDecimal[j] = temp + 48;
+            j = j-1;
+        }
+        i=i-4;
+    }
+    if(i ==1)
+        hexaDecimal[j] = binary_number[i-1] *2 + binary_number[i] + 48 ;
+    else if(i==0)
+        hexaDecimal[j] =  binary_number[i] + 48 ;
+    else
+        --j;
+    //    printf("\n hexadecimal value is %s \n",hexaDecimal);
+    printf("\n Equivalent hexadecimal value: \n");
+    int z = 15;
+    while(z>=0){
+        printf("%c",hexaDecimal[z]);
+        z = z-1;
+    }
+    //hexaDecimal[16] = '\0';
+    return hexaDecimal;
+}
+
 
 

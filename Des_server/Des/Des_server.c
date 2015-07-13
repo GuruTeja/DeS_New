@@ -24,6 +24,7 @@ static char *ip_address;
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
 uint64_t Input_Text ;//0x85e813540f0ab405
+uint64_t Cypher_Text;
 void initKeys() {
     keys[0]     =   0x0000000000000000;
     keys[1]     =   0x199999999999999A;
@@ -109,9 +110,60 @@ int main(int argc, const char * argv[]) {
     Input_Text = strtoull(in, (char **)NULL, 16);
     printf("\n Input text is : %016llx", Input_Text);
     
+
+    
+    //cypher text
+    char binaryNumber1[MAX],hexaDecimal1[MAX];
+    char *in1;
+    long int i1=0,j1=15;
+    int temp1;
+    in1 = malloc(sizeof(in)*MAX);
+    
+    printf("\n Enter cipher text number: ");
+    scanf("%s",binaryNumber1);
+    
+    while(binaryNumber1[i1]){
+        binaryNumber1[i1] = binaryNumber1[i1] -48;
+        ++i1;
+    }
+    
+    --i1;
+    while(i1-2>=0){
+        temp1 =  binaryNumber1[i1-3] *8 + binaryNumber1[i1-2] *4 +  binaryNumber1[i1-1] *2 + binaryNumber1[i1] ;
+        if(temp1 > 9){
+            hexaDecimal1[j1] = temp1 + 55;
+            j1=j1-1;
+        }
+        else{
+            hexaDecimal1[j1] = temp1 + 48;
+            j1=j1-1;
+        }
+        i1=i1-4;
+    }
+    
+    if(i1 ==1)
+        hexaDecimal1[j1] = binaryNumber1[i1-1] *2 + binaryNumber1[i1] + 48 ;
+    else if(i1==0)
+        hexaDecimal1[j1] =  binaryNumber1[i1] + 48 ;
+    else
+        j1++;
+    
+    printf("Equivalent hexadecimal value: ");
+    int z1 = 15;
+    while(z1>=0){
+        printf("%c",hexaDecimal1[z1]);
+        z1 = z1-1;
+    }
+    
+    in1 = hexaDecimal1;
+    Cypher_Text = strtoull(in1, (char **)NULL, 16);
+    printf("\n cypher text is : %016llx", Cypher_Text);
+    
+    
     int round_input;
-    printf("\n enter no of rounds:");
+    printf("\n no of rounds:");
     scanf("%d",&round_input);
+    
     clock_t start1;
     start1 = clock();
     
@@ -181,6 +233,7 @@ int main(int argc, const char * argv[]) {
         params[i].client_socket = clientsock;
         params[i].start = start1;
         params[i].round = round_input;
+        params[i].cipher_Text= Cypher_Text;
     }
     
     printf("client socket is : %d \n",params[0].client_socket);
