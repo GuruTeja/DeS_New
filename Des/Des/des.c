@@ -143,7 +143,7 @@ static char Left_Circular_Shift[] = {
     1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1
 };
 
-static uint64_t cypher_text = 0xA70A0382A93C4C9C;
+static uint64_t cypher_text = 0xD06F640A4807EB45;
 
 void* DES_Algorithm(void *readparams_temp) {
     
@@ -156,39 +156,7 @@ void* DES_Algorithm(void *readparams_temp) {
     printf("Input: %016llx \n", input_text);
     printf("Key: %016llx \n", key);
     
-    /*
-//    //check socket availability
-//    params.server_message[0] = '\0';
-//    int error = 0;
-//    socklen_t len = sizeof (error);
-//    int retval = getsockopt(params.client_socket, SOL_SOCKET, SO_ERROR, &error, &len );
-//    
-//    if(retval == 0) {
-//        printf("Socket alive \n");
-//        //ack/read from client
-//        ssize_t readsize = 0;
-//        //while(readsize == 0){
-//        
-//        //readsize = recv(params.client_socket, params.server_message, 20, 0);
-//        printf("Message from server is %s \n",params.server_message);
-//        
-//        //if(readsize > 0) {
-////            printf("\n ack received from server");
-////            //key from server
-////            params.server_message[readsize] = '\0';
-////            printf("\n key found by server is : %s",params.server_message);
-////            printf("\n stop all threads");
-////            int pthread_kill(pthread_t thread, int sig);
-////            printf("\n killed all threads");
-////            printf("\n exiting from code");
-////            exit(0);
-//        //}
-//        
-//    } else {
-//        printf("Sorry !! %d", retval);
-//    } 
-     */
-    
+    //keys
     for(long long int i = 1; i <= 16 ; i++ ) {
         char row, column;
         /* 28 bits */
@@ -294,7 +262,7 @@ void* DES_Algorithm(void *readparams_temp) {
         Left_text = (uint32_t)(init_permutaion_res >> 32) & L64_MASK;
         Right_text = (uint64_t) init_permutaion_res & L64_MASK;
         
-        
+        //rounds
         for (int round = 0; round < 16; round = round + 1) {
             // round 1 of DES
             // Expansion table with Right_Text

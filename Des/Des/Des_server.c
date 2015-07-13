@@ -22,9 +22,9 @@ static char *ip_address;
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
-uint64_t Input_Text = 0x0123456789ABCDEF;
+uint64_t Input_Text = 0x85e813540f0ab405;
 void initKeys() {
-    keys[0]     =   0x0000000000000000;
+    keys[0]     =   0x0000000000200000;
     keys[1]     =   0x0000000000000010;
     keys[2]     =   0x0000000000000030;
     keys[3]     =   0x0000000000000040;
@@ -121,7 +121,7 @@ int main(int argc, const char * argv[]) {
     pthread_t threads[NTHREADS];
     int rc,i;
     
-    for (int i=0; i < NTHREADS; i++) {
+    for (int i=0; i < 1; i++) {
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
         if (rc != 0) {
             printf("Thread %d creation failed ! \n", i);
@@ -129,7 +129,7 @@ int main(int argc, const char * argv[]) {
     }
     
     /* wait for threads to finish */
-    for (i=0; i < NTHREADS; ++i) {
+    for (i=0; i < 1; ++i) {
         rc = pthread_join(threads[i], NULL);
     }
     

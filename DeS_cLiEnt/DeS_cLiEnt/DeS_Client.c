@@ -19,7 +19,7 @@ static char *ip_address = "192.168.0.24";
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
-
+uint64_t Input_Text = 0x85E813540F0AB800;
 void initKeys() {
     keys[0]     =   0x0000000000000020;
     keys[1]     =   0x0000000000000060;
@@ -85,7 +85,7 @@ int main(int argc, const char * argv[]) {
     initKeys();
     
     for (int i=0; i < NTHREADS; i++) {
-        params[i].input_text = 0x0123456789ABCDEF;
+        params[i].input_text = Input_Text;
         params[i].key = keys[i];
         params[i].client_socket = client_socket;
     }
