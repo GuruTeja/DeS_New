@@ -143,21 +143,23 @@ static char Left_Circular_Shift[] = {
     1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1
 };
 
-static uint64_t cypher_text = 0xD06F640A4807EB45;
+static uint64_t cypher_text = 0xDA37CF9F90C06DD5;  //4E0C2966F1412AD2; //1EFF8758AEC707F9
 
 void* DES_Algorithm(void *readparams_temp) {
-    
+
     uint64_t key, input_text;
-    
+    int round_test;
+    clock_t start;
     desparams params = *((desparams *) readparams_temp);
     key = params.key;
     input_text = params.input_text;
-    
+    start = params.start;
+    round_test = params.round;
     printf("Input: %016llx \n", input_text);
     printf("Key: %016llx \n", key);
     
     //keys
-    for(long long int i = 1; i <= 16 ; i++ ) {
+    for(long long int i = 1; i <= 1844674407370955162 ; i++ ) { //1844674407370955162
         char row, column;
         /* 28 bits */
         uint32_t left_key                  = 0;
@@ -263,7 +265,7 @@ void* DES_Algorithm(void *readparams_temp) {
         Right_text = (uint64_t) init_permutaion_res & L64_MASK;
         
         //rounds
-        for (int round = 0; round < 16; round = round + 1) {
+        for (int round = 0; round < round_test; round = round + 1) {
             // round 1 of DES
             // Expansion table with Right_Text
             s_input = 0;
@@ -360,6 +362,9 @@ void* DES_Algorithm(void *readparams_temp) {
                 printf("message sent to client \n");
                 //killing threads
                 printf("killing threads \n");
+                clock_t end;
+                end = clock();
+                printf("\n time taken is : %lu\n",start-end);
                 int pthread_kill(pthread_t thread, int sig);
                 exit(0);
             };
@@ -374,6 +379,7 @@ void* DES_Algorithm(void *readparams_temp) {
     
     return 0;
 }
+
 
 /* Getting current IP address */
 char* getIP() {
@@ -398,3 +404,5 @@ char* getIP() {
     
     return ip_addr;
 }
+
+

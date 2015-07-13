@@ -1,10 +1,8 @@
-//
+
 //  des.h
 //  Des
-//
 //  Created by Guru Teja Mannava on 7/9/15.
 //  Copyright (c) 2015 Guru Teja Mannava. All rights reserved.
-//
 
 //socket
 #include <sys/socket.h>
@@ -19,6 +17,7 @@
 #define L64_MASK  0x00000000ffffffff
 #define H64_MASK  0xffffffff00000000
 
+
 typedef struct params {
     uint64_t key;  //cypher text for this key A956007AC5E6FCFE
     uint64_t input_text;
@@ -26,9 +25,13 @@ typedef struct params {
     int client_socket;
     char server_message[10];
     char buffer[1024];
+    int round;
+    //time
+    clock_t start;
 } desparams;
 
 //Performs DES Algorithm
 void* DES_Algorithm(void *readparams_temp);
 
 char * getIP();
+char * bintohex();

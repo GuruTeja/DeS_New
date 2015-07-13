@@ -12,6 +12,7 @@
 #include <inttypes.h>
 #include <pthread.h>
 #include <sys/fcntl.h>
+#include <sys/time.h>
 
 #include "des.h"
 
@@ -22,16 +23,21 @@ static char *ip_address;
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
-uint64_t Input_Text = 0x85e813540f0ab405;
+uint64_t Input_Text ;//0x85e813540f0ab405
 void initKeys() {
-    keys[0]     =   0x0000000000200000;
-    keys[1]     =   0x0000000000000010;
-    keys[2]     =   0x0000000000000030;
-    keys[3]     =   0x0000000000000040;
-    keys[4]     =   0x0000000000000050;
+    keys[0]     =   0x0000000000000000;
+    keys[1]     =   0x199999999999999A;
+    keys[2]     =   0x3333333333333334;
+    keys[3]     =   0x4CCCCCCCCCCCCCCE;
+    keys[4]     =   0x6666666666666668;
 }
 
 void * handleHostMessages(void * args) {
+    //clock_t start, end;
+   // start = clock();
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    
     char *msg = malloc(20);
     int clientsock = *((int *)args);
     printf("Thread :: Sock is %d \n", clientsock);
@@ -41,13 +47,73 @@ void * handleHostMessages(void * args) {
         if (size > 0) {
             printf("Thread :: %ld bits - %s \n", size, msg);
             printf("killing threads \n");
+            struct timeval tv;
+            gettimeofday(&tv,NULL);
+            //end = clock();
+            //printf("\n time taken is :%lu \n",start-end);
             int pthread_kill(pthread_t thread, int sig);
             exit(0);
         }
     }
+    
+    
 }
-
+#define MAX 1000
 int main(int argc, const char * argv[]) {
+    
+    /*for inputs */
+    
+    char binaryNumber[MAX],hexaDecimal[MAX];
+    char *in;
+    long int i=0,j=15;
+    int temp;
+    in = malloc(sizeof(in)*MAX);
+    
+    printf("Enter binary number: ");
+    scanf("%s",binaryNumber);
+    
+    while(binaryNumber[i]){
+        binaryNumber[i] = binaryNumber[i] -48;
+        ++i;
+    }
+    
+    --i;
+    while(i-2>=0){
+        temp =  binaryNumber[i-3] *8 + binaryNumber[i-2] *4 +  binaryNumber[i-1] *2 + binaryNumber[i] ;
+        if(temp > 9){
+            hexaDecimal[j] = temp + 55;
+            j=j-1;
+        }
+        else{
+            hexaDecimal[j] = temp + 48;
+            j=j-1;
+        }
+        i=i-4;
+    }
+    
+    if(i ==1)
+        hexaDecimal[j] = binaryNumber[i-1] *2 + binaryNumber[i] + 48 ;
+    else if(i==0)
+        hexaDecimal[j] =  binaryNumber[i] + 48 ;
+    else
+        j++;
+    
+    printf("Equivalent hexadecimal value: ");
+    int z = 15;
+    while(z>=0){
+        printf("%c",hexaDecimal[z]);
+        z = z-1;
+    }
+    
+    in = hexaDecimal;
+    Input_Text = strtoull(in, (char **)NULL, 16);
+    printf("\n Input text is : %016llx", Input_Text);
+    
+    int round_input;
+    printf("\n enter no of rounds:");
+    scanf("%d",&round_input);
+    clock_t start1;
+    start1 = clock();
     
     ip_address = getIP();   //Fetch the current system IP Address
     
@@ -88,30 +154,33 @@ int main(int argc, const char * argv[]) {
         printf("Accepted Client \n");
     }
     
+    
     //creating a thread for listing from client all time of process
     pthread_t sockThread;
     int res = pthread_create(&sockThread, NULL, handleHostMessages,(void *)&clientsock);
     
     
-    /* TEST MESSAGE TO CLIENT */
-    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
-    ssize_t read_size;
-    server_message  = "hi prad";
-    printf("message being sent to client is :%s \n",server_message);
-    read_size = write(clientsock ,server_message, strlen(server_message));
-    if(read_size > 0){
-        
-        printf("message sent to client \n");
-    };
+//    /* TEST MESSAGE TO CLIENT */
+//    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
+//    ssize_t read_size;
+//    server_message  = "hi prad";
+//    printf("message being sent to client is :%s \n",server_message);
+//    read_size = write(clientsock ,server_message, strlen(server_message));
+//    if(read_size > 0){
+//        
+//        printf("message sent to client \n");
+//    };
     
     /* Params initialisation */
     
     initKeys();
-    
+
     for (int i=0; i < NTHREADS; i++) {
         params[i].input_text = Input_Text;
         params[i].key = keys[i];
         params[i].client_socket = clientsock;
+        params[i].start = start1;
+        params[i].round = round_input;
     }
     
     printf("client socket is : %d \n",params[0].client_socket);
@@ -119,7 +188,7 @@ int main(int argc, const char * argv[]) {
     /* thread creation */
     
     pthread_t threads[NTHREADS];
-    int rc,i;
+    int rc;
     
     for (int i=0; i < 1; i++) {
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
@@ -129,9 +198,10 @@ int main(int argc, const char * argv[]) {
     }
     
     /* wait for threads to finish */
-    for (i=0; i < 1; ++i) {
+    for (int i=0; i < 1; ++i) {
         rc = pthread_join(threads[i], NULL);
     }
+    
     
     printf("== Press any key to exit ==");
     return getchar();

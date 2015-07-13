@@ -14,7 +14,7 @@
 		<string>https://github.com/GuruTeja/DeS_New.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Des/Des.xcodeproj</string>
+	<string>Des_server/Des.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CE53AEA12D595DD733A7D880643A98AFC29F057D</key>
