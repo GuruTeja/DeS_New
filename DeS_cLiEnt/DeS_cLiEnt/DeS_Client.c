@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <pthread.h>
+#include <time.h>
 
 //#include<unistd.h>  //write
 #include "des.h"
@@ -54,15 +55,20 @@ void * handleHostMessages(void * args) {
 #define MAX 1000
 int main(int argc, const char * argv[]) {
     
-    /*for inputs */
+    //time
+    char start_time[100];
+    time_t now = time (0);
+    strftime (start_time, 100, "%Y-%m-%d %H:%M:%S.000", localtime (&now));
+    printf ("%s\n", start_time);
     
+    /*for inputs */
     char binaryNumber[MAX],hexaDecimal[MAX];
     char *in;
     long int i=0,j=15;
     int temp;
     in = malloc(sizeof(in)*MAX);
     
-    printf("Enter binary number: ");
+    printf("Enter binary number of Input plain text: ");
     scanf("%s",binaryNumber);
     
     while(binaryNumber[i]){
@@ -91,7 +97,7 @@ int main(int argc, const char * argv[]) {
     else
         j++;
     
-    printf("Equivalent hexadecimal value: ");
+    printf("Equivalent hexadecimal value of input text is: ");
     int z = 15;
     while(z>=0){
         printf("%c",hexaDecimal[z]);
@@ -140,7 +146,7 @@ int main(int argc, const char * argv[]) {
     else
         j1++;
     
-    printf("Equivalent hexadecimal value: ");
+    printf("Equivalent hexadecimal value of cypher text: ");
     int z1 = 15;
     while(z1>=0){
         printf("%c",hexaDecimal1[z1]);

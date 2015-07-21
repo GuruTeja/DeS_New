@@ -23,7 +23,7 @@ uint64_t keys[NTHREADS];
 uint64_t Input_Text;
 uint64_t Cypher_Text;
 void initKeys() {
-    keys[0]     =   0x0000000000000000;
+    keys[0]     =   0x7fffffff11111111;
     keys[1]     =   0x199999999999999A;
     keys[2]     =   0x3333333333333334;
     keys[3]     =   0x4CCCCCCCCCCCCCCE;
@@ -55,6 +55,13 @@ void * handleHostMessages(void * args) {
 #define MAX 1000
 int main(int argc, const char * argv[]) {
     
+    //time
+    char start_time[100];
+    time_t now = time (0);
+    strftime (start_time, 100, "%Y-%m-%d %H:%M:%S.000", localtime (&now));
+    printf ("%s\n", start_time);
+    
+    
     /* enter inputs here */
     char binaryNumber[MAX],hexaDecimal[MAX];
     char *in;
@@ -62,7 +69,7 @@ int main(int argc, const char * argv[]) {
     int temp;
     in = malloc(sizeof(in)*MAX);
     
-    printf("Enter binary number: ");
+    printf("Enter binary number of Input plain text: ");
     scanf("%s",binaryNumber);
     
     while(binaryNumber[i]){
@@ -91,7 +98,7 @@ int main(int argc, const char * argv[]) {
     else
         j++;
     
-    printf("Equivalent hexadecimal value: ");
+    printf("Equivalent hexadecimal value of plain text is: ");
     int z = 15;
     while(z>=0){
         printf("%c",hexaDecimal[z]);
@@ -111,7 +118,7 @@ int main(int argc, const char * argv[]) {
     int temp1;
     in1 = malloc(sizeof(in)*MAX);
     
-    printf("\n Enter cipher text number: ");
+    printf("\n Enter bnary number of cipher text: ");
     scanf("%s",binaryNumber1);
     
     while(binaryNumber1[i1]){
@@ -140,7 +147,7 @@ int main(int argc, const char * argv[]) {
     else
         j1++;
     
-    printf("Equivalent hexadecimal value: ");
+    printf("Equivalent hexadecimal value of  cypher text: ");
     int z1 = 15;
     while(z1>=0){
         printf("%c",hexaDecimal1[z1]);

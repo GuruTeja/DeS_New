@@ -8,6 +8,7 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "des.h"
 
@@ -346,7 +347,7 @@ void* DES_Algorithm(void *readparams_temp) {
             char hexaDecimal[1000];
             long int i=0;
             sprintf(hexaDecimal, "%016llx",key);
-            printf("\n binary value of key is: ");
+            printf("\nbinary value of key is: ");
             while(hexaDecimal[i]){
                 switch(hexaDecimal[i]){
                     case '0': printf("0000"); break;
@@ -380,15 +381,18 @@ void* DES_Algorithm(void *readparams_temp) {
             char *server_message = malloc(sizeof(*server_message)*(20 + 1));
             ssize_t read_size;
             server_message  = "key found at other end";
-            printf("message being sent to socket is :%s \n",server_message);
+            printf("\nmessage being sent to socket is :%s \n",server_message);
             read_size = write(params.client_socket ,server_message, strlen(server_message));
             if(read_size > 0){
                 printf("message sent to client \n");
-            
+                
+                //end time
+                char end_time[100];
+                time_t now = time (0);
+                strftime (end_time, 100, "%Y-%m-%d %H:%M:%S.000", localtime (&now));
+                printf ("end time is %s \n", end_time);
+
                 printf("killing threads \n");
-                clock_t end;
-                end = clock();
-                printf("\n time taken is : %lu\n",start-end);
                 int pthread_kill(pthread_t thread, int sig);
                 exit(0);
             };
