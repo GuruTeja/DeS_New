@@ -23,7 +23,7 @@ uint64_t keys[NTHREADS];
 uint64_t Input_Text;
 uint64_t Cypher_Text;
 void initKeys() {
-    keys[0]     =   0x7fffffff11111111;
+    keys[0]     =   0x0000000000000000;
     keys[1]     =   0x199999999999999A;
     keys[2]     =   0x3333333333333334;
     keys[3]     =   0x4CCCCCCCCCCCCCCE;
@@ -231,7 +231,7 @@ int main(int argc, const char * argv[]) {
     pthread_t threads[NTHREADS];
     int rc;
     
-    for (int i=0; i < 1; i++) {
+    for (int i=0; i < NTHREADS; i++) {
         rc = pthread_create(&threads[i], NULL, DES_Algorithm,(void *)&params[i]);
         if (rc != 0) {
             printf("Thread %d creation failed ! \n", i);
@@ -239,7 +239,7 @@ int main(int argc, const char * argv[]) {
     }
     
     /* wait for threads to finish */
-    for (int i=0; i < 1; ++i) {
+    for (int i=0; i < NTHREADS; ++i) {
         rc = pthread_join(threads[i], NULL);
     }
     
