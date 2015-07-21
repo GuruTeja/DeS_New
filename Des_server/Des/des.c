@@ -1,10 +1,8 @@
-//
+
 //  des.c
 //  Des
-//
 //  Created by Guru Teja Mannava on 7/9/15.
 //  Copyright (c) 2015 Guru Teja Mannava. All rights reserved.
-//
 
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -143,7 +141,6 @@ static char Left_Circular_Shift[] = {
     1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1
 };
 
-//static uint64_t cypher_text = 0xDA37CF9F90C06DD5;  //4E0C2966F1412AD2; //1EFF8758AEC707F9
 
 void* DES_Algorithm(void *readparams_temp) {
 
@@ -160,7 +157,7 @@ void* DES_Algorithm(void *readparams_temp) {
     printf("Key: %016llx \n", key);
     
     //keys
-    for(long long int i = 1; i <= 1844674407370955162 ; i++ ) { //1844674407370955162
+    for(long long int i = 1; i <= 1844674407370955162 ; i++ ) {
         char row, column;
         /* 28 bits */
         uint32_t left_key                  = 0;
@@ -183,16 +180,9 @@ void* DES_Algorithm(void *readparams_temp) {
         uint64_t pre_output_final       = 0;
         uint64_t inv_init_permutaion    = 0;
         
-        
-        //printf("\n \n text is : %016llX",input_text);
-        //printf("\n \n key is : %016llx",key);
-        
-        
-        //for key calculations
+        //caluculating keys
         uint64_t permuted_Choice_1 = 0;
         uint64_t permuted_Choice_2 = 0;
-        
-        //int kill;
         
         //calculations on Key - permuted choice 1
         
@@ -212,7 +202,7 @@ void* DES_Algorithm(void *readparams_temp) {
         //printf("\n \n right key is :%016x", right_key);
         
         
-        /* Calculation of  16 sub keys */
+        /* 16 sub keys Calculation  */
         for (int i = 0; i< 16; i++) {
             
             /* key schedule */
@@ -254,7 +244,8 @@ void* DES_Algorithm(void *readparams_temp) {
         for(int i = 0; i < 64; i++){
             
             init_permutaion_res   = init_permutaion_res << 1;
-            init_permutaion_res |= (input_text >> (64 - Initial_Permutation_IP[i])) & LB64_MASK ;// 0x0000000000000001 //gives the value of text in that initial permuation position.
+            init_permutaion_res |= (input_text >> (64 - Initial_Permutation_IP[i])) & LB64_MASK ;
+            //gives the value of text in that initial permuation position.
             //can remove LB64_MASK
         }
         
@@ -297,7 +288,7 @@ void* DES_Algorithm(void *readparams_temp) {
             }
             //printf("\n \n s_output from S_Box for round %d is %016x:", round + 1, s_output);
             
-            //Permutaion Function
+            //PermutaionFunction calculations
             f_function_res = 0;
             for (int j = 0; j < 32; j++) {
                 
@@ -343,17 +334,49 @@ void* DES_Algorithm(void *readparams_temp) {
         }
         
         
-        //hexadecimal
         printf("encryption result is :%016llX \n",inv_init_permutaion);
         
         //printf("Key is %016llx \n", key);
         
-        //check with hexadecimal of cyphertext
-        if(inv_init_permutaion == cypher_text){ //0x5E88E6EC0F039D94
+  
+        if(inv_init_permutaion == cypher_text){
             
             printf("matched cypertext is %016llx for Key %016llx \n",cypher_text ,key);
+        
+            char hexaDecimal[1000];
+            long int i=0;
+            sprintf(hexaDecimal, "%016llx",key);
+            printf("\n binary value of key is: ");
+            while(hexaDecimal[i]){
+                switch(hexaDecimal[i]){
+                    case '0': printf("0000"); break;
+                    case '1': printf("0001"); break;
+                    case '2': printf("0010"); break;
+                    case '3': printf("0011"); break;
+                    case '4': printf("0100"); break;
+                    case '5': printf("0101"); break;
+                    case '6': printf("0110"); break;
+                    case '7': printf("0111"); break;
+                    case '8': printf("1000"); break;
+                    case '9': printf("1001"); break;
+                    case 'A': printf("1010"); break;
+                    case 'B': printf("1011"); break;
+                    case 'C': printf("1100"); break;
+                    case 'D': printf("1101"); break;
+                    case 'E': printf("1110"); break;
+                    case 'F': printf("1111"); break;
+                    case 'a': printf("1010"); break;
+                    case 'b': printf("1011"); break;
+                    case 'c': printf("1100"); break;
+                    case 'd': printf("1101"); break;
+                    case 'e': printf("1110"); break;
+                    case 'f': printf("1111"); break;
+                    default:  printf("\nInvalid hexadecimal digit %c ",hexaDecimal[i]); return 0;
+                }
+                i++;
+            }
             
-            /* TEST MESSAGE TO CLIENT */
+            
             char *server_message = malloc(sizeof(*server_message)*(20 + 1));
             ssize_t read_size;
             server_message  = "key found at other end";
@@ -361,7 +384,7 @@ void* DES_Algorithm(void *readparams_temp) {
             read_size = write(params.client_socket ,server_message, strlen(server_message));
             if(read_size > 0){
                 printf("message sent to client \n");
-                //killing threads
+            
                 printf("killing threads \n");
                 clock_t end;
                 end = clock();

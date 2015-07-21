@@ -1,11 +1,8 @@
-//
+
 //  main.c
 //  DES_Algorithm
-//
 //  Created by Guru Teja Mannava on 7/3/15.
 //  Copyright (c) 2015 GUru Teja Mannava. All rights reserved.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -156,7 +153,7 @@ int main(int argc, const char * argv[]) {
     
     
     int round_input;
-    printf("no of rounds");
+    printf("\n no of rounds");
     scanf("%d",&round_input);
     
     clock_t start, end;

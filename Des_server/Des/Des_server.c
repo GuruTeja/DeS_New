@@ -16,14 +16,11 @@
 
 #include "des.h"
 
-/* text */
-//static uint64_t input_text = 0x0123456789ABCDEF;
-
 static char *ip_address;
 
 desparams params[NTHREADS];
 uint64_t keys[NTHREADS];
-uint64_t Input_Text ;//0x85e813540f0ab405
+uint64_t Input_Text;
 uint64_t Cypher_Text;
 void initKeys() {
     keys[0]     =   0x0000000000000000;
@@ -50,20 +47,15 @@ void * handleHostMessages(void * args) {
             printf("killing threads \n");
             struct timeval tv;
             gettimeofday(&tv,NULL);
-            //end = clock();
-            //printf("\n time taken is :%lu \n",start-end);
             int pthread_kill(pthread_t thread, int sig);
             exit(0);
         }
     }
-    
-    
 }
 #define MAX 1000
 int main(int argc, const char * argv[]) {
     
-    /*for inputs */
-    
+    /* enter inputs here */
     char binaryNumber[MAX],hexaDecimal[MAX];
     char *in;
     long int i=0,j=15;
@@ -112,7 +104,7 @@ int main(int argc, const char * argv[]) {
     
 
     
-    //cypher text
+    //for cipher
     char binaryNumber1[MAX],hexaDecimal1[MAX];
     char *in1;
     long int i1=0,j1=15;
@@ -210,18 +202,7 @@ int main(int argc, const char * argv[]) {
     //creating a thread for listing from client all time of process
     pthread_t sockThread;
     int res = pthread_create(&sockThread, NULL, handleHostMessages,(void *)&clientsock);
-    
-    
-//    /* TEST MESSAGE TO CLIENT */
-//    char *server_message = malloc(sizeof(*server_message)*(20 + 1));
-//    ssize_t read_size;
-//    server_message  = "hi prad";
-//    printf("message being sent to client is :%s \n",server_message);
-//    read_size = write(clientsock ,server_message, strlen(server_message));
-//    if(read_size > 0){
-//        
-//        printf("message sent to client \n");
-//    };
+
     
     /* Params initialisation */
     
